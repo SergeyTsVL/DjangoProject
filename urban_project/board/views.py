@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from board.models import Advertisement
-from board.forms import AdvertisementForm
+from .models import Advertisement
+from .forms import AdvertisementForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic.base import TemplateResponseMixin, View
 
 def logout_view(request):
     logout(request)
@@ -46,3 +48,18 @@ def add_advertisement(request):
     else:
         form = AdvertisementForm()
     return render(request, 'board/add_advertisement.html', {'form': form})
+
+@login_required
+def edit_advertisement(request, pk):
+    advertisement = Advertisement.objects.get(pk=pk)
+    if request.method == "POST":
+        form = AdvertisementForm(request.POST, request.FILES, instance=advertisement)
+        if form.is_valid():
+            form.instance.author = request.user
+            form.save()
+            img_obj = form.instance
+            return redirect('board:advertisement_detail', pk=img_obj.pk)
+            # return redirect('board:advertisement_list')
+    else:
+        form = AdvertisementForm(instance=advertisement)
+    return render(request, 'board/edit_advertisement.html', {'form': form, 'advertisement': advertisement})
