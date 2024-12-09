@@ -1,10 +1,8 @@
-from django.shortcuts import render, redirect
 from .models import Advertisement
 from .forms import AdvertisementForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.shortcuts import redirect, get_object_or_404
-from django.views.generic.base import TemplateResponseMixin, View
+
 
 def logout_view(request):
     logout(request)
@@ -51,6 +49,15 @@ def add_advertisement(request):
 
 @login_required
 def edit_advertisement(request, pk):
+    """
+    Этот метод считывает данные объектов из класса Advertisement, проверяет были ли запрос "POST", обрабатывает
+    данные формы, если все поля заполнены полностью, корректны и содержат все необходимые данные. Затем, при
+    редактировании, автоматически устанавливает автора как текущего авторизованного пользователя. Если запроса "POST"
+    не было, то возвращаемся к предыдущей странице.
+    :param request:
+    :param pk:
+    :return:
+    """
     advertisement = Advertisement.objects.get(pk=pk)
     if request.method == "POST":
         form = AdvertisementForm(request.POST, request.FILES, instance=advertisement)
@@ -58,8 +65,9 @@ def edit_advertisement(request, pk):
             form.instance.author = request.user
             form.save()
             img_obj = form.instance
+            # Перенаправляет на страницу с сохраненными исправлениями.
             return redirect('board:advertisement_detail', pk=img_obj.pk)
-            # return redirect('board:advertisement_list')
     else:
+        # вызов функции которая отобразит в браузере указанный шаблон с данными формы и объявления.
         form = AdvertisementForm(instance=advertisement)
     return render(request, 'board/edit_advertisement.html', {'form': form, 'advertisement': advertisement})
