@@ -1,4 +1,4 @@
-# Журнал тренировок 
+# Журнал тренировок
 Начальное окошко при запуске кода.
 
 ![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.1/images/1.png)
