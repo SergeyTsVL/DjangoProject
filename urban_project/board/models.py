@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Advertisement(models.Model):
+    """
+    Этот класс определяет модель для хранения информации об объявлениях в базе данных.
+    """
     title = models.CharField(max_length=255)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -11,6 +14,9 @@ class Advertisement(models.Model):
         return self.title
 
 class Comment(models.Model):
+    """
+    Этот класс определяет модель для хранения комментариев к статьям или другим объектам в базе данных.
+    """
     advertisement = models.ForeignKey(Advertisement, related_name='comments', on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
