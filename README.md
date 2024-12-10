@@ -10,7 +10,7 @@ python manage.py migrate
 # Запускаем DjangoProject
 python manage.py runserver
 
-# так выглядит начальная страница проекта
+# Так выглядит начальная страница проекта
 
 ![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.1/images/6.png)
 
