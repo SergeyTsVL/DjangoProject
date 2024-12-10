@@ -3,5 +3,12 @@
 {% block content %}
 <h1>{{ advertisement.title }}</h1>
 <p>{{ advertisement.content }}</p>
-<a href="{% url 'board:edit_advertisement' advertisement.pk %}">Редактировать</a>
+<div style="display:flex; flex-direction:column">
+    <span>
+        <a href="{% url 'board:edit_advertisement' advertisement.pk %}">Редактировать</a>
+    </span>
+    <span>
+        <a href="{% url 'board:delete_advertisement' advertisement.pk %}">Удалить</a>
+    </span>
+</div>
 {% endblock %}

@@ -93,3 +93,20 @@ def edit_advertisement(request, pk):
         form = AdvertisementForm(instance=advertisement)
     return render(request, 'board/edit_advertisement.html',
                   {'form': form, 'advertisement': advertisement})
+
+@login_required
+def delete_advertisement(request, pk):
+    """
+    Этот метод считывает данные объектов из класса Advertisement, проверяет были ли запрос "POST", после чего удаляет
+    объявление и возвращается в окно объявления.
+    :param request:
+    :param pk:
+    :return:
+    """
+    advertisement = Advertisement.objects.get(pk=pk)
+    if request.method == "POST":
+        advertisement.delete()
+        return redirect('board:advertisement_list')
+    else:
+        None
+    return render(request, 'board/delete_advertisement.html', {'advertisement': advertisement})

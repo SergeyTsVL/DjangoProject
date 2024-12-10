@@ -11,6 +11,10 @@ class Advertisement(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """
+        Метод используется для определения строкового представления объекта модели
+        :return:
+        """
         return self.title
 
 class Comment(models.Model):
@@ -23,4 +27,8 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
+        """
+        Метод используется для определения строкового представления объекта модели
+        :return:
+        """
         return f'Comment by {self.author} on {self.advertisement}'
