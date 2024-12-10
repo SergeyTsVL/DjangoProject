@@ -49,18 +49,18 @@ python manage.py runserver
 
 # Создаем объявления для удаления.
 
-![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.1/images/11.png)
+![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.2/images/11.png)
 
 # Входим в это объявление и кликаем надпись с надписью "Удалить".
 
-![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.1/images/12.png)
+![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.2/images/12.png)
 
 # Подтверждаем удаление кликом по кнопке "Удалить".
 
-![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.1/images/13.png)
+![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.2/images/13.png)
 
 # После удаления возвращаемся (автоматически) на страницу со списком объявлений, убеждаемся что объявление удалено.
 
-![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.1/images/14.png)
+![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.2/images/14.png)
 
 
