@@ -91,4 +91,5 @@ def edit_advertisement(request, pk):
     else:
         # вызов функции которая отобразит в браузере указанный шаблон с данными формы и объявления.
         form = AdvertisementForm(instance=advertisement)
-    return render(request, 'board/edit_advertisement.html', {'form': form, 'advertisement': advertisement})
+    return render(request, 'board/edit_advertisement.html',
+                  {'form': form, 'advertisement': advertisement})
