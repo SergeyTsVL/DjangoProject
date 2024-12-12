@@ -10,8 +10,6 @@
   {% for advertisement in advertisements %}
     <li>
       <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
-
-
     </li>
   {% endfor %}
 </ul>

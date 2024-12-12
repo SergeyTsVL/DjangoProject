@@ -7,4 +7,10 @@
     {{ form.as_p }}
     <button type="submit">Submit</button>
   </form>
+
+{% if advertisement.image %}
+
+  <img src="{{ advertisement.image.url }}" alt="Изображение объявления">
+{% endif %}
+
 {% endblock %}

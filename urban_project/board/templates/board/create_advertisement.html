@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Объявление</title>
+</head>
+<body>
+    <div class="advertisement">
+        <h2>{{ advertisement.title }}</h2>
+        <p>{{ advertisement.content }}</p>
+        {% if advertisement.image %}
+            <img src="{{ advertisement.image.url }}" alt="Изображение объявления">
+        {% endif %}
+    </div>
+</body>
+</html>
