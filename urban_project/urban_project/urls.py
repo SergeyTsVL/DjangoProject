@@ -26,4 +26,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', board_views.home, name='home'),
     path('signup/', board_views.signup, name='signup'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # path('upload/', views.image_upload_view),
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

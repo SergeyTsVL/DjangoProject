@@ -9,7 +9,7 @@ class Advertisement(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='advertisement/', blank=True, null=True)
+    image = models.ImageField(upload_to='advertisements/', blank=True, null=True)
 
     def __str__(self):
         """
@@ -26,7 +26,7 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='advertisement/', blank=True, null=True)
+    image = models.ImageField(upload_to='advertisements/', blank=True, null=True)
 
     def __str__(self):
         """
