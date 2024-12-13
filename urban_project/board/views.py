@@ -112,12 +112,6 @@ def delete_advertisement(request, pk):
     return render(request, 'board/delete_advertisement.html', {'advertisement': advertisement})
 
 @login_required
-def create_advertisement(request):
-    if request.method == "POST":
-        form = AdvertisementForm(request.POST, request.FILES)
-        if form.is_valid():
-            advertisement = form.save()
-            return redirect('board:advertisement_detail', pk=advertisement.pk)
-    else:
-        form = AdvertisementForm()
-    return render(request, 'board/create_advertisement.html', {'form': form})
+def create_advertisement(request, pk):
+    announcement = Advertisement.objects.get(pk=pk)
+    return render(request, 'board/create_advertisement.html', {'announcement': announcement})

@@ -3,7 +3,9 @@
 {% block content %}
 <h1>{{ advertisement.title }}</h1>
 <p>{{ advertisement.content }}</p>
-
+{% if advertisement.image %}
+    <img src=" {{ advertisement.image.url }}">
+{% endif %}
 <div style="display:flex; flex-direction:column">
     <span>
         <a href="{% url 'board:edit_advertisement' advertisement.pk %}">Редактировать</a>
@@ -17,7 +19,7 @@
     <h2>{{ advertisement.title }}</h2>
     <p>{{ advertisement.content }}</p>
     {% if advertisement.image %}
-        <img src="{{ advertisement.image.url }}" alt="Изображение объявления">
+        <img src=" static {{ advertisement.image.url }}" alt="Изображение объявления">
     {% endif %}
 </div>
 {% endblock %}
