@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Advertisements</h1>
+<h1>Рекламные объявления</h1>
 {% if user.is_authenticated %}
-    <a href="{% url 'board:add_advertisement' %}"><button>Add Advertisement</button></a>
+    <a href="{% url 'board:add_advertisement' %}"><button>Добавить объявление</button></a>
 {% endif %}
 <ul>
   {% for advertisement in advertisements %}
+     <h3>Автор: {{ advertisement.author.username }}</h3>
     <li>
-      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
+      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }} {{ advertisement.author.username }}</a>
       {% if advertisement.image %}
         <img src=" {{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 100%; height: auto;">
       {% endif %}
