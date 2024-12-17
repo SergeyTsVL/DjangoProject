@@ -120,3 +120,26 @@ def create_advertisement(request):
     else:
         form = AdvertisementForm()
     return render(request, 'board/create_advertisement.html', {'form': form})
+
+@login_required
+def likes(request, pk):
+    print(2222)
+    advertisement = Advertisement.objects.get(pk=pk)
+    if request.method == "POST":
+        advertisement.likes += 1
+        advertisement.save()
+        return redirect('board:advertisement_list')
+    else:
+        form = AdvertisementForm()
+    return render(request, 'board/advertisement_list.html', {'advertisement': advertisement})
+
+@login_required
+def dislikes(request, pk):
+    advertisement = Advertisement.objects.get(pk=pk)
+    if request.method == "POST":
+        advertisement.dislikes += 1
+        advertisement.save()
+        return redirect('board:advertisement_list')
+    else:
+        None
+    return render(request, 'board/advertisement_list.html', {'advertisement': advertisement})

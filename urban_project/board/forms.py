@@ -14,7 +14,7 @@ class AdvertisementForm(forms.ModelForm):
     """
     class Meta:
         model = Advertisement
-        fields = ['title', 'content', 'image', 'author']
+        fields = ['title', 'content', 'image', 'author', 'likes', 'dislikes']
 
 class SignUpForm(UserCreationForm):
     """

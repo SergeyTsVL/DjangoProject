@@ -7,9 +7,15 @@
 {% endif %}
 <ul>
   {% for advertisement in advertisements %}
-     <h3>Автор: {{ advertisement.author.username }}</h3>
+    <h3>Автор: {{ advertisement.author.username }}</h3>
+    <form action="{% url 'likes' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Лайк: </button>
+    </form>
+
     <li>
-      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }} {{ advertisement.author.username }}</a>
+      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}
+          {{ advertisement.author.username }}</a>
       {% if advertisement.image %}
         <img src=" {{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 100%; height: auto;">
       {% endif %}

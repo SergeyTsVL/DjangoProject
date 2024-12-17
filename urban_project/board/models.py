@@ -10,6 +10,8 @@ class Advertisement(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='advertisements/', blank=True, null=True)
+    likes = models.IntegerField(default=0, verbose_name='Лайки')
+    dislikes = models.IntegerField(default=0, verbose_name='Дизлайки')
 
     def __str__(self):
         """
