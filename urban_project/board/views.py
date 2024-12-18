@@ -16,7 +16,7 @@ def logout_view(request):
 
 def signup(request):
     """
-    ызывает страницу для подписи объявлений.
+    вызывает страницу для подписи объявлений.
     """
     if request.method == 'POST':
         form = SignUpForm(request.POST)

@@ -8,9 +8,13 @@
 <ul>
   {% for advertisement in advertisements %}
     <h3>Автор: {{ advertisement.author.username }}</h3>
-    <form action="{% url 'likes' %}" method="post">
+    <form action="{% url 'board:likes' pk=advertisement.pk %}" method="post">
         {% csrf_token %}
-        <button type="submit">Лайк: </button>
+        <button type="submit">👍 {{ advertisement.likes }}</button>
+    </form>
+    <form action="{% url 'board:dislikes' pk=advertisement.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">👎 {{ advertisement.dislikes }}</button>
     </form>
 
     <li>

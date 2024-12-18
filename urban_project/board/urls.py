@@ -10,5 +10,6 @@ urlpatterns = [
     path('add/', views.add_advertisement, name='add_advertisement'),
     path('edit/<int:pk>/', views.edit_advertisement, name='edit_advertisement'),
     path('delete/<int:pk>/', views.delete_advertisement, name='delete_advertisement'),
-    path('likes/', views.likes, name='advertisement_list'),
+    path('likes/<int:pk>/', views.likes, name='likes'),
+    path('dislikes/<int:pk>/', views.dislikes, name='dislikes'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
