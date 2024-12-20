@@ -27,4 +27,12 @@
   {% endfor %}
 </ul>
 
+
+<h2>{{ user.get_full_name }}</h2>
+<ul>
+  <li>Имя пользователя: {{ user.username }}</li>
+  <li>Местоположение: {{ user.profile.location }}</li>
+  <li>Дата рождения: {{ user.profile.birth_date }}</li>
+</ul>
+
 {% endblock %}

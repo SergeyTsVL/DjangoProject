@@ -1,5 +1,13 @@
+from datetime import timezone
+
+from django.contrib.auth.models import User
+from importlib.resources._common import _
+
+from django.core.checks import messages
+from django.db import transaction
+
 from .models import Advertisement
-from .forms import AdvertisementForm
+from .forms import AdvertisementForm, UserForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
@@ -143,3 +151,58 @@ def dislikes(request, pk):
     else:
         None
     return render(request, 'board/advertisement_list.html', {'advertisement': advertisement})
+
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, _('Ваш профиль был успешно обновлен!'))
+            return redirect('settings:profile')
+        else:
+            messages.error(request, _('Пожалуйста, исправьте ошибки.'))
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profiles/profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from .models import Profile
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Profile
+
+
+class UpdateProfileStats(APIView):
+    def post(self, request):
+        user = get_object_or_404(User, pk=request.data.get('user_id'))
+        profile = user.profile
+
+        # Обновляем статистику
+        profile.total_visits += 1
+        profile.last_visit = timezone.now()
+
+        # Сохраняем изменения
+        profile.save()
+
+        return Response({'message': 'Статистика успешно обновлена'})

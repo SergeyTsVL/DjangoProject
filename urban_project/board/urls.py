@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import UpdateProfileStats
 
 app_name = 'board'
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     path('delete/<int:pk>/', views.delete_advertisement, name='delete_advertisement'),
     path('likes/<int:pk>/', views.likes, name='likes'),
     path('dislikes/<int:pk>/', views.dislikes, name='dislikes'),
+    path('update-stats/', UpdateProfileStats.as_view(), name='update-profile-stats'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

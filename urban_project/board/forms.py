@@ -1,7 +1,10 @@
 from django import forms
-from .models import Advertisement
+from rest_framework import serializers
+
+from .models import Advertisement, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+
 
 
 class AdvertisementForm(forms.ModelForm):
@@ -28,3 +31,20 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2',)
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ('user', 'total_visits', 'last_visit', 'bio', 'location')
+    exclude = ['last_visit']
+#
+# class ProfileSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Profile
+#         fields = ['id', 'user', 'company', 'url', 'total_visits', 'bio', 'location']
+#     exclude = ['last_visit']
