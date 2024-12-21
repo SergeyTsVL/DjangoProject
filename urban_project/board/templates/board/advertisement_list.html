@@ -29,10 +29,10 @@
 
 
 <h2>{{ user.get_full_name }}</h2>
-<ul>
+<h2>
   <li>Имя пользователя: {{ user.username }}</li>
-  <li>Местоположение: {{ user.profile.location }}</li>
-  <li>Дата рождения: {{ user.profile.birth_date }}</li>
-</ul>
+  <li>Количество входов: {{ user.profile.total_visits }}</li>
+  <li>Последний визит: {{ user.profile.last_visit }}</li>
+</h2>
 
 {% endblock %}

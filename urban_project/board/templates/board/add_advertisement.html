@@ -5,10 +5,9 @@
 <form method="post"  enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Сохранить изменения /board/edit/2/</button>
+    <button type="submit">Сохранить изменения</button>
 </form>
 {% if advertisement.image %}
     <img src=" {{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 100%; height: auto;">
 {% endif %}
-
 {% endblock %}

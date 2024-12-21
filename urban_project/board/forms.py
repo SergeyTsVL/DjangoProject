@@ -40,11 +40,5 @@ class UserForm(forms.ModelForm):
 class ProfileForm(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user', 'total_visits', 'last_visit', 'bio', 'location')
+        fields = ('user', 'total_visits', 'last_visit')
     exclude = ['last_visit']
-#
-# class ProfileSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Profile
-#         fields = ['id', 'user', 'company', 'url', 'total_visits', 'bio', 'location']
-#     exclude = ['last_visit']
