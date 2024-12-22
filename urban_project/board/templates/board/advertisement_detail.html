@@ -16,4 +16,11 @@
     </span>
 </div>
 
+
+<h2>
+    <li>Имя автора объявления: {{ advertisement.author }}</li>
+    <li>Количество входов: {{ advertisement.author.profile.total_visits }}</li>
+    <li>Последний визит: {{ advertisement.author.profile.last_visit }}</li>
+    <li>Всего загружено объявлений: {{ advertisement.author.profile.id }}</li>
+</h2>
 {% endblock %}

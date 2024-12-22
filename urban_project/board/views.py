@@ -51,7 +51,7 @@ def advertisement_list(request):
 
 def advertisement_detail(request, pk):
     """
-    Вызывает страницу advertisement_detail.html .
+    Вызывает страницу advertisement_detail.html.
     """
     advertisement = Advertisement.objects.get(pk=pk)
     return render(request, 'board/advertisement_detail.html', {'advertisement': advertisement})
@@ -160,7 +160,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     """
-    Этот метод определяет колличество входов каждого пользователя и сохраняет в базе данных
+    Этот метод определяет количество входов каждого пользователя и сохраняет в базе данных
     :param sender:
     :param instance:
     :param kwargs:

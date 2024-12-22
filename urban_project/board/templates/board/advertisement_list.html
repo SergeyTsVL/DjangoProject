@@ -18,8 +18,7 @@
     </form>
 
     <li>
-      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}
-          {{ advertisement.author.username }}</a>
+      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
       {% if advertisement.image %}
         <img src=" {{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 100%; height: auto;">
       {% endif %}
@@ -27,12 +26,11 @@
   {% endfor %}
 </ul>
 
-
-<h2>{{ user.get_full_name }}</h2>
 <h2>
-  <li>Имя пользователя: {{ user.username }}</li>
-  <li>Количество входов: {{ user.profile.total_visits }}</li>
-  <li>Последний визит: {{ user.profile.last_visit }}</li>
+    <li>Имя текущего автора: {{ user.username }}</li>
+    <li>Количество входов: {{ user.profile.total_visits }}</li>
+    <li>Последний визит: {{ user.profile.last_visit }}</li>
+    <li>Всего загружено объявлений: {{ user.profile.id }}</li>
 </h2>
 
 {% endblock %}

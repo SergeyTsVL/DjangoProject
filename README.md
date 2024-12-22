@@ -67,7 +67,7 @@ python manage.py runserver
 
 ![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.6/images/15.png)
 
-# Создаем и расширяем модель профиля пользователя, чтобы хранить статистику.
+# Создаем и расширяем модель профиля пользователя, чтобы хранить статистику количества входов текущего пользователя.
 
 ![Uploading 1.png…](https://github.com/SergeyTsVL/DjangoProject/blob/1.6/images/16.png)
 
