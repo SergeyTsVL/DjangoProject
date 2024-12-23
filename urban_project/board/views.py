@@ -11,6 +11,10 @@ from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 from .models import Profile
 
+from django.shortcuts import render
+from django.core.paginator import Paginator
+from .models import Post
+
 
 def logout_view(request):
     """
@@ -168,4 +172,13 @@ def save_user_profile(sender, instance, **kwargs):
     """
     instance.profile.total_visits += 1
     instance.profile.save()
+
+
+
+def index(request):
+    posts = Advertisement.objects.all().order_by('-created_at')
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'board/advertisement_list.html', {'page_obj': page_obj})
 
