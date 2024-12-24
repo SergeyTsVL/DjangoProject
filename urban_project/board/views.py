@@ -13,7 +13,7 @@ from .models import Profile
 
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from .models import Post
+
 
 
 def logout_view(request):
@@ -51,7 +51,11 @@ def advertisement_list(request):
     Вызывает страницу advertisement_list.html.
     """
     advertisements = Advertisement.objects.all()
-    return render(request, 'board/advertisement_list.html', {'advertisements': advertisements})
+    posts = Advertisement.objects.all().order_by('-created_at')
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'board/advertisement_list.html', {'advertisements': advertisements, 'page_obj': page_obj})
 
 def advertisement_detail(request, pk):
     """
@@ -173,8 +177,7 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.total_visits += 1
     instance.profile.save()
 
-
-
+@login_required
 def index(request):
     posts = Advertisement.objects.all().order_by('-created_at')
     paginator = Paginator(posts, 3)
