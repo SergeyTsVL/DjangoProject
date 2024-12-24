@@ -50,12 +50,11 @@ def advertisement_list(request):
     """
     Вызывает страницу advertisement_list.html.
     """
-    advertisements = Advertisement.objects.all()
     posts = Advertisement.objects.all().order_by('-created_at')
     paginator = Paginator(posts, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'board/advertisement_list.html', {'advertisements': advertisements, 'page_obj': page_obj})
+    return render(request, 'board/advertisement_list.html', {'page_obj': page_obj})
 
 def advertisement_detail(request, pk):
     """

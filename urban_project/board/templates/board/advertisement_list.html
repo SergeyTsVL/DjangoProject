@@ -2,30 +2,79 @@
 
 {% block content %}
 <h1>Рекламные объявления</h1>
+
 {% if user.is_authenticated %}
     <a href="{% url 'board:add_advertisement' %}"><button>Добавить объявление</button></a>
 {% endif %}
-<ul>
-  {% for advertisement in advertisements %}
-    <h3>Автор: {{ advertisement.author.username }}</h3>
-    <form action="{% url 'board:likes' pk=advertisement.pk %}" method="post">
-        {% csrf_token %}
-        <button type="submit">👍 {{ advertisement.likes }}</button>
-    </form>
-    <form action="{% url 'board:dislikes' pk=advertisement.pk %}" method="post">
-        {% csrf_token %}
-        <button type="submit">👎 {{ advertisement.dislikes }}</button>
-    </form>
 
-    <li>
-      <a href="{% url 'board:advertisement_detail' pk=advertisement.pk %}">{{ advertisement.title }}</a>
-      {% if advertisement.image %}
-        <img src=" {{ advertisement.image.url }}" alt="{{ advertisement.title }}" style="max-width: 100%; height: auto;">
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
+<body>
+<div class="row">
+    {% for post in page_obj %}
+        <h3>Автор: {{ post.author.username }}</h3>
+        <form action="{% url 'board:likes' pk=post.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">👍 {{ post.likes }}</button>
+        </form>
+        <form action="{% url 'board:dislikes' pk=post.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">👎 {{ post.dislikes }}</button>
+        </form>
 
+        <li>
+          <a href="{% url 'board:advertisement_detail' pk=post.pk %}">{{ post.title }}</a>
+          {% if post.image %}
+            <img src=" {{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
+          {% endif %}
+        </li>
+    {% endfor %}
+</div>
+<h2>
+       {% if page_obj.has_other_pages %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination-string">
+            {% if page_obj.has_previous %}
+
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                   <span aria-hidden="true">≪≪≪</span>
+                </a>
+
+            {% else %}
+
+                <a class="page link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">≪≪≪</span>
+                </a>
+
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+
+                    <a class="page-link" href="#">{{ i }}</a>
+
+                {% else %}
+
+                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">≫≫≫</span>
+                </a>
+
+            {% else %}
+
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">≫≫≫</span>
+                </a>
+
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+</h2>
 <h2>
     <li>Имя текущего автора: {{ user.username }}</li>
     <li>Количество входов: {{ user.profile.total_visits }}</li>
@@ -33,60 +82,5 @@
     <li>Всего загружено объявлений: {{ user.profile.id }}</li>
 </h2>
 
-<body>
-<div class="row">
-    {% for post in page_obj %}
-        <div class="col-md-4">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <p>{{ post.created_at }}</p>
-        </div>
-    {% endfor %}
-</div>
-       {% if page_obj.has_other_pages %}
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                       <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disable">
-                    <a class="page link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-
-            {% for i in page_obj.paginator.page_range %}
-                {% if page_obj.number == i %}
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">{{ i }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
-{% endif %}
 </body>
 {% endblock %}
