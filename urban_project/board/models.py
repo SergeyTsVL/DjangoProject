@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Advertisement(models.Model):
     """
     Этот класс определяет модель для хранения информации об объявлениях в базе данных.
@@ -36,12 +37,6 @@ class Comment(models.Model):
         :return:
         """
         return f'Comment by {self.author} on {self.advertisement}'
-
-
-from django.db import models
-from django.contrib.auth.models import User
-
-
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

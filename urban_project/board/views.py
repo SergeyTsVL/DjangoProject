@@ -10,7 +10,6 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 from .models import Profile
-
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
@@ -20,9 +19,7 @@ def logout_view(request):
     """
     Этот метод выполняет выход пользователя из системы и перенаправляет его на домашнюю страницу.
     """
-
     logout(request)
-
     return redirect('home')
 
 def signup(request):
